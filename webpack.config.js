@@ -4,6 +4,10 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ReloadHtmlWebpackPlugin = require('reload-html-webpack-plugin');
 var port = '3000';
 
+var Dashboard = require('webpack-dashboard');
+var DashboardPlugin = require('webpack-dashboard/plugin');
+var dashboard = new Dashboard();
+
 module.exports = {
     // https://webpack.js.org/concepts/entry-points/
     entry: [
@@ -54,11 +58,13 @@ module.exports = {
         //new webpack.HotModuleReplacementPlugin(),
         new webpack.NamedModulesPlugin(),
         //new webpack.NoErrorsPlugin()
+        new DashboardPlugin(dashboard.setData)
     ],
 
     devServer: {
         port: port,
         contentBase: './dist/',
         //hot: true
+        quiet: true
     }
 };
